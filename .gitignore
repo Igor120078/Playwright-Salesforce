@@ -14,5 +14,8 @@
 **/jsonReports/
 **/reports/
 **/playwright/.cache/
+**/env/
+**/auth/
 .DS_Store
-
+**/.env
+.vscode
