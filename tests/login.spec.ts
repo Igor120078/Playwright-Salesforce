@@ -1,7 +1,7 @@
 /* eslint-disable import/order */
-import { expect, test } from '@playwright/test';
-import { LoginPage } from '../src/poms/loginPagePOM';
-import { HomePage } from '../src/poms/homePagePOM';
+import { test, expect } from '@playwright/test';
+import { LoginPage } from '../src/poms/login/loginPage';
+import { HomePage } from '../src/poms/homePage/homePage';
 import dotenv from 'dotenv';
 dotenv.config();
 

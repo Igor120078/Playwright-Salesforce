@@ -30,8 +30,8 @@ export default defineConfig({
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		// baseURL: 'http://127.0.0.1:3000',
-		viewport: { width: 1920, height: 1080 },
-		headless: false,
+		viewport: { width: 2560, height: 1600 },
+		headless: true,
 		browserName: 'chromium',
 		screenshot: 'only-on-failure',
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -52,7 +52,10 @@ export default defineConfig({
 	projects: [
 		{
 			name: 'Desktop_Chrome',
-			use: { ...devices['Desktop Chrome'] },
+			use: {
+				...devices['Desktop Chrome'],
+				viewport: { width: 2200, height: 1400 },
+			},
 		},
 
 		{
