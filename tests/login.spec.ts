@@ -5,7 +5,7 @@ import { HomePage } from '../src/poms/homePage/homePage';
 import dotenv from 'dotenv';
 dotenv.config();
 
-test('Login and Home Salesforce page test @Login', async ({ browser }) => {
+test('Login and validate Home Salesforce page test @Login', async ({ browser }) => {
 	const context = await browser.newContext();
 	const page = await context.newPage();
 	const loginPage = new LoginPage(page);

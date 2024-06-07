@@ -7,14 +7,13 @@ import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
 import { LeadPage } from '../src/poms/lead/leadPage';
 
-test('Login and Home Salesforce page test @Login', async ({ page }) => {
+test('New Lead Creating test @Leads', async ({ page }) => {
 	const loginPage = new LoginPage(page);
 	await loginPage.navigate();
 	await loginPage.validateAllComponents();
 	await loginPage.fillUsername(process.env.ADMINNAME!);
 	await loginPage.fillPassword(process.env.ADMINPASSWORD!);
 	await loginPage.clickOnLoginBtn();
-	await page.waitForTimeout(5000);
 
 	const mainMenu = new MainMenu(page);
 	await mainMenu.validateAllComponents();
@@ -26,7 +25,7 @@ test('Login and Home Salesforce page test @Login', async ({ page }) => {
 
 	const testDataLead = new TestDataLead();
 	const leadData = testDataLead.getLeadData();
-	// console.log(leadData);
+
 	// New Lead Form filling
 	const newLead = new NewLeadPage(page);
 	await newLead.validateAllComponents();
@@ -51,7 +50,6 @@ test('Login and Home Salesforce page test @Login', async ({ page }) => {
 	await newLead.fillCountry(leadData.country);
 	const leadOwner: string = await newLead.getLeadOwner();
 	await newLead.clickOnBottomSaveBtn();
-	await page.waitForTimeout(5000);
 
 	// Created Lead Page
 	const leadPage = new LeadPage(page);

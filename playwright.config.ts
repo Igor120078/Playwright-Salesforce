@@ -16,7 +16,7 @@ dotenv.config({ path: './env/' + process.env.TEST_ENVIRONMENT + '/.env' });
 export default defineConfig({
 	testDir: './tests',
 	/* Run tests in files in parallel */
-	fullyParallel: true,
+	fullyParallel: false,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
 	forbidOnly: !!process.env.CI,
 	/* Retry on CI only */
@@ -43,7 +43,7 @@ export default defineConfig({
 			//   isEnabled: (name, severity) => true,
 			//   log: (name, severity, message, args) => console.log(name, severity)
 			// },
-			slowMo: 500,
+			slowMo: 200,
 		},
 	},
 
@@ -61,6 +61,11 @@ export default defineConfig({
 		},
 
 		{
+			name: 'Microsoft_Edge',
+			use: { ...devices['Desktop Edge'], channel: 'msedge' },
+		},
+
+		{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] },
 		},
@@ -72,7 +77,7 @@ export default defineConfig({
 
 		/* Test against mobile viewports. */
 		{
-			name: 'Mobile Chrome',
+			name: 'Mobile_Chrome',
 			use: { ...devices['Pixel 5'] },
 		},
 		{
