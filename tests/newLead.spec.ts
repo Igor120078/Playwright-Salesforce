@@ -3,8 +3,9 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/poms/login/loginPage';
 import { MainMenu } from '../src/poms/homePage/mainMenu';
 import { TestDataLead } from '../test_data/testDataLead';
-import { LeadsPage } from '../src/poms/lead/leadsPage';
+import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
+import { LeadPage } from '../src/poms/lead/leadPage';
 
 test('Login and Home Salesforce page test @Login', async ({ page }) => {
 	const loginPage = new LoginPage(page);
@@ -19,13 +20,14 @@ test('Login and Home Salesforce page test @Login', async ({ page }) => {
 	await mainMenu.validateAllComponents();
 	await mainMenu.clickOnLeads();
 
-	const leadsPage = new LeadsPage(page);
+	const leadsPage = new LeadsTabPage(page);
 	await leadsPage.validateAllComponents();
 	await leadsPage.clickOnNewBtn();
 
 	const testDataLead = new TestDataLead();
 	const leadData = testDataLead.getLeadData();
 	// console.log(leadData);
+	// New Lead Form filling
 	const newLead = new NewLeadPage(page);
 	await newLead.validateAllComponents();
 	await newLead.selectLeadStatus(leadData.leadStatus);
@@ -47,6 +49,28 @@ test('Login and Home Salesforce page test @Login', async ({ page }) => {
 	await newLead.fillCity(leadData.city);
 	await newLead.fillZipCode(leadData.zipCode);
 	await newLead.fillCountry(leadData.country);
+	const leadOwner: string = await newLead.getLeadOwner();
 	await newLead.clickOnBottomSaveBtn();
-	await page.pause();
+	await page.waitForTimeout(5000);
+
+	// Created Lead Page
+	const leadPage = new LeadPage(page);
+	await leadPage.validateAllComponents();
+	await leadPage.validateLeadDetails(
+		`${leadData.salutation} ${leadData.firstName} ${leadData.middleName} ${leadData.lastName} ${leadData.leadSuffix}`,
+		leadData.leadStatus,
+		`${leadData.salutation} ${leadData.firstName} ${leadData.middleName} ${leadData.lastName} ${leadData.leadSuffix}`,
+		leadData.leadTitle,
+		leadData.leadEmail,
+		leadData.leadPhone,
+		leadData.leadMobile,
+		leadData.leadRating,
+		leadOwner,
+		leadData.leadWebsite,
+		leadData.leadCompany,
+		leadData.industry,
+		leadData.NoOfEmployees,
+		leadData.leadSource,
+		`${leadData.street}${leadData.city}, ${leadData.zipCode}${leadData.country}`
+	);
 });

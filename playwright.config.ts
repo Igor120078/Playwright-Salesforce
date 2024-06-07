@@ -9,7 +9,6 @@ dotenv.config({ path: './env/' + process.env.TEST_ENVIRONMENT + '/.env' });
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -30,7 +29,7 @@ export default defineConfig({
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		// baseURL: 'http://127.0.0.1:3000',
-		viewport: { width: 2560, height: 1600 },
+		viewport: null, //{ width: 2560, height: 1600 },
 		headless: false,
 		browserName: 'chromium',
 		screenshot: 'only-on-failure',
@@ -38,14 +37,14 @@ export default defineConfig({
 		// trace: 'on-first-retry',
 		trace: 'on',
 		video: 'retain-on-failure',
-		// launchOptions: {
-		// 	// args: ['--start-maximized'],
-		// 	// logger: {
-		// 	//   isEnabled: (name, severity) => true,
-		// 	//   log: (name, severity, message, args) => console.log(name, severity)
-		// 	// },
-		// 	slowMo: 500,
-		// },
+		launchOptions: {
+			args: ['--start-maximized'],
+			// logger: {
+			//   isEnabled: (name, severity) => true,
+			//   log: (name, severity, message, args) => console.log(name, severity)
+			// },
+			slowMo: 500,
+		},
 	},
 
 	/* Configure projects for major browsers */
@@ -53,8 +52,11 @@ export default defineConfig({
 		{
 			name: 'Desktop_Chrome',
 			use: {
-				...devices['Desktop Chrome'],
-				viewport: { width: 2200, height: 1400 },
+				viewport: null,
+				// launchOptions: {
+				// 	args: ['--start-maximized'],
+				// 	slowMo: 500,
+				// },
 			},
 		},
 

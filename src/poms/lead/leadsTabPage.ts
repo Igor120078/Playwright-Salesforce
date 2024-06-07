@@ -1,7 +1,7 @@
 /* eslint-disable import/order */
 import { Locator, Page, expect } from '@playwright/test';
 
-export class LeadsPage {
+export class LeadsTabPage {
 	private page: Page;
 	private view: Locator;
 	private viewDropdown: Locator;

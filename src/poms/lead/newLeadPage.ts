@@ -10,7 +10,7 @@ export class NewLeadPage {
 	private bottomSaveBtn: Locator;
 	private bottomSaveNewBtn: Locator;
 	private bottomCancelBtn: Locator;
-
+	private leadOwner: Locator;
 	// Lead Form Inputs
 	private leadStatusDropdown: Locator;
 	private salutationDropdown: Locator;
@@ -45,6 +45,7 @@ export class NewLeadPage {
 		this.bottomSaveBtn = page.locator("(//input[@name='save'])[2]");
 		this.bottomSaveNewBtn = page.locator("(//input[@name='save_new'])[2]");
 		this.bottomCancelBtn = page.locator("(//input[@name='cancel'])[2]");
+		this.leadOwner = page.locator("(//td[@class='dataCol'])[1]");
 
 		// Lead Form Inputs
 		this.leadStatusDropdown = page.locator('#lea13');
@@ -114,6 +115,10 @@ export class NewLeadPage {
 		await expect(this.state).toBeVisible();
 		await expect(this.zipCode).toBeVisible();
 		await expect(this.country).toBeVisible();
+	}
+
+	async getLeadOwner(): Promise<string> {
+		return await this.leadOwner.innerText();
 	}
 
 	async selectLeadStatus(status: string): Promise<void> {
