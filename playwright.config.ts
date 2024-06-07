@@ -52,27 +52,49 @@ export default defineConfig({
 		{
 			name: 'Desktop_Chrome',
 			use: {
+				browserName: 'chromium',
 				viewport: null,
-				// launchOptions: {
-				// 	args: ['--start-maximized'],
-				// 	slowMo: 500,
-				// },
+				launchOptions: {
+					args: ['--start-maximized'],
+					slowMo: 200,
+				},
 			},
 		},
 
 		{
-			name: 'Microsoft_Edge',
-			use: { ...devices['Desktop Edge'], channel: 'msedge' },
+			name: 'Desktop_Edge',
+			use: {
+				channel: 'msedge',
+				viewport: null,
+				launchOptions: {
+					args: ['--start-maximized'],
+					slowMo: 200,
+				},
+			},
 		},
 
 		{
 			name: 'firefox',
-			use: { ...devices['Desktop Firefox'] },
+			use: {
+				browserName: 'firefox',
+				viewport: null,
+				launchOptions: {
+					args: ['--start-maximized'],
+					slowMo: 200,
+				},
+			},
 		},
 
 		{
 			name: 'webkit',
-			use: { ...devices['Desktop Safari'] },
+			use: {
+				browserName: 'webkit',
+				viewport: null,
+				launchOptions: {
+					args: ['--start-maximized'],
+					slowMo: 200,
+				},
+			},
 		},
 
 		/* Test against mobile viewports. */
@@ -84,16 +106,6 @@ export default defineConfig({
 			name: 'Tablet_Safari',
 			use: { ...devices['iPad (gen 5) landscape'] },
 		},
-
-		/* Test against branded browsers. */
-		// {
-		//   name: 'Microsoft Edge',
-		//   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-		// },
-		// {
-		//   name: 'Google Chrome',
-		//   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-		// },
 	],
 
 	/* Run your local dev server before starting the tests */

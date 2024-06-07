@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export class TestDataLead {
+export class TestDataLeadDuplicated {
 	constructor() {}
 
 	leadData = [

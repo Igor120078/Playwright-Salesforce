@@ -6,7 +6,7 @@ import { MainMenu } from '../src/poms/homePage/mainMenu';
 import { TestDataLead } from '../test_data/testDataLead';
 import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
-import { LeadPage } from '../src/poms/lead/leadPage';
+import { NewLeadDuplicatedPage } from '../src/poms/lead/newLeadDuplicatedPage';
 
 test('New Lead Creating test @Leads', async ({ browser }) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
@@ -58,24 +58,7 @@ test('New Lead Creating test @Leads', async ({ browser }) => {
 	const leadOwner: string = await newLead.getLeadOwner();
 	await newLead.clickOnBottomSaveBtn();
 
-	// Created Lead Page
-	const leadPage = new LeadPage(page);
-	await leadPage.validateAllComponents();
-	await leadPage.validateLeadDetails(
-		`${leadData.salutation} ${leadData.firstName} ${leadData.middleName} ${leadData.lastName} ${leadData.leadSuffix}`,
-		leadData.leadStatus,
-		`${leadData.salutation} ${leadData.firstName} ${leadData.middleName} ${leadData.lastName} ${leadData.leadSuffix}`,
-		leadData.leadTitle,
-		leadData.leadEmail,
-		leadData.leadPhone,
-		leadData.leadMobile,
-		leadData.leadRating,
-		leadOwner,
-		leadData.leadWebsite,
-		leadData.leadCompany,
-		leadData.industry,
-		leadData.NoOfEmployees,
-		leadData.leadSource,
-		`${leadData.street}${leadData.city}, ${leadData.zipCode}${leadData.country}`
-	);
+	// DuplicatedCreated Lead Page
+	const leadDuplicatedPage = new NewLeadDuplicatedPage(page);
+	await leadDuplicatedPage.validateErrorMessage();
 });

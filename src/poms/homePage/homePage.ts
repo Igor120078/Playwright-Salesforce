@@ -16,10 +16,10 @@ export class HomePage {
 		this.calendar = page.getByText('Calendar', { exact: true });
 	}
 
-	// async navigate(): Promise<void> {
-	// 	const testUrl = `${process.env.WEB_BASE_URL_CZ}`;
-	// 	await this.page.goto(testUrl);
-	// }
+	async navigate(): Promise<void> {
+		const testUrl = `${process.env.HOME_PAGE_URL}`;
+		await this.page.goto(testUrl);
+	}
 
 	async goBack(): Promise<void> {
 		await this.page.goBack();

@@ -12,5 +12,5 @@ Repository for Salesforce test automation Demo Project using Playwright
 ### Run all the tests with a specific Config File and specific Project
 
 ```
-    npx playwright test --config playwright.config.ts --project=Desktop_Chrome
+    npx playwright test --config playwright.config.ts --project=Desktop_Edge
 ```

@@ -14,7 +14,7 @@ test('Login and validate Home Salesforce page test @Login', async ({ browser }) 
 	await loginPage.fillUsername(process.env.ADMINNAME!);
 	await loginPage.fillPassword(process.env.ADMINPASSWORD!);
 	await loginPage.clickOnLoginBtn();
-	await page.waitForTimeout(10000);
 	const homePage = new HomePage(page);
+	await context.storageState({ path: 'storageState/loginState.json' });
 	await homePage.validateAllComponents();
 });
