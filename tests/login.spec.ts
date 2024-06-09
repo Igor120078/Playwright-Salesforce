@@ -5,11 +5,12 @@ import { HomePage } from '../src/poms/homePage/homePage';
 import dotenv from 'dotenv';
 dotenv.config();
 
-test('Login and validate Home Salesforce page test @Login', async ({ browser }) => {
+test('Login and validate Salesforce Home Page @Login @Positive', async ({ browser }, testInfo) => {
 	const context = await browser.newContext();
 	const page = await context.newPage();
 	const loginPage = new LoginPage(page);
 	await loginPage.navigate();
+
 	await loginPage.validateAllComponents();
 	await loginPage.fillUsername(process.env.ADMINNAME!);
 	await loginPage.fillPassword(process.env.ADMINPASSWORD!);
@@ -17,4 +18,15 @@ test('Login and validate Home Salesforce page test @Login', async ({ browser }) 
 	const homePage = new HomePage(page);
 	await context.storageState({ path: 'storageState/loginState.json' });
 	await homePage.validateAllComponents();
+
+	const totalValueGraph = homePage.getTotalValueGraph();
+	await totalValueGraph.scrollIntoViewIfNeeded();
+	// await totalValueGraph.screenshot({ path: 'src/screenShots/totalValueGraphTablet.png' });
+
+	const projectName = testInfo.project.name;
+	if (projectName === 'Tablet_Safari') {
+		await expect(totalValueGraph).toHaveScreenshot('totalValueGraphTablet.png');
+	} else {
+		await expect(totalValueGraph).toHaveScreenshot('totalValueGraph.png');
+	}
 });

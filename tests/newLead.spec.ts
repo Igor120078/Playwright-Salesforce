@@ -1,28 +1,28 @@
 /* eslint-disable import/order */
 import { test, expect } from '@playwright/test';
-// import { LoginPage } from '../src/poms/login/loginPage';
 import { HomePage } from '../src/poms/homePage/homePage';
-import { MainMenu } from '../src/poms/homePage/mainMenu';
+import { MainMenuDesktop } from '../src/poms/homePage/mainMenuDesktop';
+import { MainMenuTablet } from '../src/poms/homePage/mainMenuTablet';
 import { TestDataLead } from '../test_data/testDataLead';
 import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
 import { LeadPage } from '../src/poms/lead/leadPage';
 
-test('New Lead Creating test @Leads', async ({ browser }) => {
+test('New Lead Creating test @Leads @Positive', async ({ browser }) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
 	const page = await context.newPage();
-	// const loginPage = new LoginPage(page);
-	// await loginPage.navigate();
-	// await loginPage.validateAllComponents();
-	// await loginPage.fillUsername(process.env.ADMINNAME!);
-	// await loginPage.fillPassword(process.env.ADMINPASSWORD!);
-	// await loginPage.clickOnLoginBtn();
 
 	const homePage = new HomePage(page);
 	await homePage.navigate();
 	await homePage.validateAllComponents();
 
-	const mainMenu = new MainMenu(page);
+	const projectName = test.info().project.name;
+	let mainMenu: MainMenuDesktop | MainMenuTablet;
+	if (projectName === 'Tablet_Safari') {
+		mainMenu = new MainMenuTablet(page);
+	} else {
+		mainMenu = new MainMenuDesktop(page);
+	}
 	await mainMenu.validateAllComponents();
 	await mainMenu.clickOnLeads();
 

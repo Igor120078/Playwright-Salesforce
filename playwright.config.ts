@@ -15,6 +15,7 @@ dotenv.config({ path: './env/' + process.env.TEST_ENVIRONMENT + '/.env' });
  */
 export default defineConfig({
 	testDir: './tests',
+	snapshotPathTemplate: './src/screenShots/{testFilePath}/{arg}{ext}',
 	/* Run tests in files in parallel */
 	fullyParallel: false,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,9 +23,22 @@ export default defineConfig({
 	/* Retry on CI only */
 	retries: process.env.CI ? 2 : 0,
 	/* Opt out of parallel tests on CI. */
-	workers: process.env.CI ? 1 : undefined,
+	workers: 1,
+	// workers: process.env.CI ? 1 : undefined,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
-	reporter: 'html',
+	reporter: [
+		[
+			'html',
+			{
+				outputFolder: 'playwright-report',
+				open: 'never',
+			},
+		],
+		['./customReporters/customReporter.ts'],
+		['./customReporters/customJsonReporter.ts'],
+		['list'],
+		// isCI ? ['github'] : ['line'],
+	],
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
@@ -43,7 +57,7 @@ export default defineConfig({
 			//   isEnabled: (name, severity) => true,
 			//   log: (name, severity, message, args) => console.log(name, severity)
 			// },
-			slowMo: 200,
+			slowMo: 100,
 		},
 	},
 
@@ -56,7 +70,7 @@ export default defineConfig({
 				viewport: null,
 				launchOptions: {
 					args: ['--start-maximized'],
-					slowMo: 200,
+					slowMo: 100,
 				},
 			},
 		},

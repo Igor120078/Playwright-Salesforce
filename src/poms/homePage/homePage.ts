@@ -1,5 +1,8 @@
 /* eslint-disable import/order */
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, Page, expect, test } from '@playwright/test';
+import { MainMenu } from './mainMenu';
+import { MainMenuDesktop } from './mainMenuDesktop';
+import { MainMenuTablet } from './mainMenuTablet';
 
 export class HomePage {
 	private page: Page;
@@ -7,6 +10,7 @@ export class HomePage {
 	private dashboard: Locator;
 	private myTasks: Locator;
 	private calendar: Locator;
+	private totalValueGraph: Locator;
 
 	constructor(page: Page) {
 		this.page = page;
@@ -14,6 +18,7 @@ export class HomePage {
 		this.dashboard = page.getByText('Dashboard', { exact: true });
 		this.myTasks = page.getByText('My Tasks', { exact: true });
 		this.calendar = page.getByText('Calendar', { exact: true });
+		this.totalValueGraph = page.locator("//img[@id='01a2o000003kOnTImg']");
 	}
 
 	async navigate(): Promise<void> {
@@ -30,5 +35,18 @@ export class HomePage {
 		await expect(this.dashboard).toBeVisible();
 		await expect(this.myTasks).toBeVisible();
 		await expect(this.calendar).toBeVisible();
+	}
+
+	public getTotalValueGraph(): Locator {
+		return this.totalValueGraph;
+	}
+
+	async selectMainMenuPOM(): Promise<MainMenu> {
+		const projectName = test.info().project.name;
+		if (projectName === 'Tablet_Safari') {
+			return new MainMenuTablet(this.page);
+		} else {
+			return new MainMenuDesktop(this.page);
+		}
 	}
 }

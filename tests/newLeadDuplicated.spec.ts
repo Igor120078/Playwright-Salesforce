@@ -2,27 +2,28 @@
 import { test, expect } from '@playwright/test';
 // import { LoginPage } from '../src/poms/login/loginPage';
 import { HomePage } from '../src/poms/homePage/homePage';
-import { MainMenu } from '../src/poms/homePage/mainMenu';
 import { TestDataLead } from '../test_data/testDataLead';
 import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
 import { NewLeadDuplicatedPage } from '../src/poms/lead/newLeadDuplicatedPage';
 
-test('New Lead Creating test @Leads', async ({ browser }) => {
+test('New Duplicated Lead Creating test @Leads @Negative', async ({ browser }) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
 	const page = await context.newPage();
-	// const loginPage = new LoginPage(page);
-	// await loginPage.navigate();
-	// await loginPage.validateAllComponents();
-	// await loginPage.fillUsername(process.env.ADMINNAME!);
-	// await loginPage.fillPassword(process.env.ADMINPASSWORD!);
-	// await loginPage.clickOnLoginBtn();
 
 	const homePage = new HomePage(page);
 	await homePage.navigate();
 	await homePage.validateAllComponents();
 
-	const mainMenu = new MainMenu(page);
+	// const projectName = test.info().project.name;
+	// let mainMenu: MainMenuDesktop | MainMenuTablet;
+	// if (projectName === 'Tablet_Safari') {
+	// 	mainMenu = new MainMenuTablet(page);
+	// } else {
+	// 	mainMenu = new MainMenuDesktop(page);
+	// }
+	const mainMenu = await homePage.selectMainMenuPOM();
+
 	await mainMenu.validateAllComponents();
 	await mainMenu.clickOnLeads();
 
@@ -55,7 +56,6 @@ test('New Lead Creating test @Leads', async ({ browser }) => {
 	await newLead.fillCity(leadData.city);
 	await newLead.fillZipCode(leadData.zipCode);
 	await newLead.fillCountry(leadData.country);
-	const leadOwner: string = await newLead.getLeadOwner();
 	await newLead.clickOnBottomSaveBtn();
 
 	// DuplicatedCreated Lead Page

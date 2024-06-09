@@ -13,4 +13,11 @@ Repository for Salesforce test automation Demo Project using Playwright
 
 ```
     npx playwright test --config playwright.config.ts --project=Desktop_Edge
+    npx playwright test --config playwright.config.ts --project=Tablet_Safari
+```
+
+### Run the test with a custom Reporter
+
+```
+    npx playwright test tests/example.spec.ts --reporter=./customReporters/customReporter.ts
 ```
