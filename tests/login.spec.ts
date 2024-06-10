@@ -20,8 +20,8 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	console.log(`Window size: ${windowSize.width}x${windowSize.height}`);
 
 	await loginPage.validateAllComponents();
-	await loginPage.fillUsername(process.env.ADMINNAME!);
-	await loginPage.fillPassword(process.env.ADMINPASSWORD!);
+	await loginPage.fillUsername(process.env.SALESFORCE_USER!);
+	await loginPage.fillPassword(process.env.SALESFORCE_PASSWORD!);
 	await loginPage.clickOnLoginBtn();
 	const homePage = new HomePage(page);
 	await context.storageState({ path: 'storageState/loginState.json' });

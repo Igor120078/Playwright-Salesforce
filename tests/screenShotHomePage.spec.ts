@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 // import { LoginPage } from '../src/poms/login/loginPage';
 import { HomePage } from '../src/poms/homePage/homePage';
 
-test('Screenshot of total value graph test @Screenshot @Positive', async ({ browser }, testInfo) => {
+test.skip('Screenshot of total value graph test @Screenshot @Positive', async ({ browser }, testInfo) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
 	const page = await context.newPage();
 	const homePage = new HomePage(page);

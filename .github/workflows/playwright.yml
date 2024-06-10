@@ -1,4 +1,8 @@
 name: Playwright Tests
+
+env:
+    SALESFORCE_USER: ${{ secrets.SALESFORCE_USER }}
+    SALESFORCE_PASSWORD: ${{ secrets.SALESFORCE_PASSWORD }}
 on:
     push:
         branches: [main, master]
