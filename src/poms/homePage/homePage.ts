@@ -22,7 +22,7 @@ export class HomePage {
 	}
 
 	async navigate(): Promise<void> {
-		const testUrl = `${process.env.HOME_PAGE_URL}`;
+		const testUrl = `${process.env.SF_HOME_PAGE_URL}`;
 		await this.page.goto(testUrl);
 	}
 

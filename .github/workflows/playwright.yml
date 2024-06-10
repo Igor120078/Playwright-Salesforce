@@ -3,6 +3,8 @@ name: Playwright Tests
 env:
     SALESFORCE_USER: ${{ secrets.SALESFORCE_USER }}
     SALESFORCE_PASSWORD: ${{ secrets.SALESFORCE_PASSWORD }}
+    WEB_BASE_URL_CZ: ${{ secrets.WEB_BASE_URL_CZ }}
+    SF_HOME_PAGE_URL: ${{ secrets.SF_HOME_PAGE_URL }}
 on:
     workflow_dispatch:
         branches: [main, master]
