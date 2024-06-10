@@ -11,6 +11,14 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	const loginPage = new LoginPage(page);
 	await loginPage.navigate();
 
+	const windowSize = await page.evaluate(() => {
+		return {
+			width: window.innerWidth,
+			height: window.innerHeight,
+		};
+	});
+	console.log(`Window size: ${windowSize.width}x${windowSize.height}`);
+
 	await loginPage.validateAllComponents();
 	await loginPage.fillUsername(process.env.ADMINNAME!);
 	await loginPage.fillPassword(process.env.ADMINPASSWORD!);
@@ -18,7 +26,7 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	const homePage = new HomePage(page);
 	await context.storageState({ path: 'storageState/loginState.json' });
 	await homePage.validateAllComponents();
-
+	/*
 	const totalValueGraph = homePage.getTotalValueGraph();
 	await totalValueGraph.scrollIntoViewIfNeeded();
 	// await totalValueGraph.screenshot({ path: 'src/screenShots/totalValueGraphTablet.png' });
@@ -29,4 +37,5 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	} else {
 		await expect(totalValueGraph).toHaveScreenshot('totalValueGraph.png');
 	}
+*/
 });

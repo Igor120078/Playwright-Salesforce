@@ -17,7 +17,8 @@
   "homepage": "https://github.com/Igor120078/Playwright-Salesforce#readme",
   "devDependencies": {
     "@playwright/test": "^1.44.1",
-    "@types/node": "^20.14.2"
+    "@types/node": "^20.14.2",
+    "allure-playwright": "^3.0.0-beta.3"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

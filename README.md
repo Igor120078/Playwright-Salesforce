@@ -21,3 +21,31 @@ Repository for Salesforce test automation Demo Project using Playwright
 ```
     npx playwright test tests/example.spec.ts --reporter=./customReporters/customReporter.ts
 ```
+
+### Using Allure Reporter
+
+#### Install Allure:
+
+```
+    npm i -D @playwright/test allure-playwright
+    or
+    brew install allure
+```
+
+#### Run the test with a Allure Reporter
+
+```
+    npx playwright test --project=Desktop_Edge --reporter=line,allure-playwright
+```
+
+#### Generate an Allure report
+
+```
+    allure generate ./allure-results --clean
+```
+
+#### Open the Allure report
+
+```
+    allure open ./allure-report
+```
