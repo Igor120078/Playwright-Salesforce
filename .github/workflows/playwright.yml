@@ -4,6 +4,8 @@ env:
     SALESFORCE_USER: ${{ secrets.SALESFORCE_USER }}
     SALESFORCE_PASSWORD: ${{ secrets.SALESFORCE_PASSWORD }}
 on:
+    workflow_dispatch:
+        branches: [main, master]
     push:
         branches: [main, master]
     pull_request:
