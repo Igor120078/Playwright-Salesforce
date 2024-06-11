@@ -3,10 +3,14 @@ import { test, expect } from '@playwright/test';
 import { HomePage } from '../src/poms/homePage/homePage';
 import { MainMenuDesktop } from '../src/poms/homePage/mainMenuDesktop';
 import { MainMenuTablet } from '../src/poms/homePage/mainMenuTablet';
-import { TestDataLead } from '../test_data/testDataLead';
+import { getTestDataLead } from '../test_data/testDataLead';
 import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
 import { LeadPage } from '../src/poms/lead/leadPage';
+
+test.afterEach('Close the page', async ({ context }) => {
+	await context.close();
+});
 
 test('New Lead Creating test @Leads @Positive', async ({ browser }) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
@@ -30,8 +34,8 @@ test('New Lead Creating test @Leads @Positive', async ({ browser }) => {
 	await leadsPage.validateAllComponents();
 	await leadsPage.clickOnNewBtn();
 
-	const testDataLead = new TestDataLead();
-	const leadData = testDataLead.getLeadData();
+	// const testDataLead = new TestDataLead();
+	const leadData = getTestDataLead();
 
 	// New Lead Form filling
 	const newLead = new NewLeadPage(page);
@@ -78,4 +82,6 @@ test('New Lead Creating test @Leads @Positive', async ({ browser }) => {
 		leadData.leadSource,
 		`${leadData.street}${leadData.city}, ${leadData.zipCode}${leadData.country}`
 	);
+
+	await context.close();
 });

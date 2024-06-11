@@ -2,10 +2,14 @@
 import { test, expect } from '@playwright/test';
 // import { LoginPage } from '../src/poms/login/loginPage';
 import { HomePage } from '../src/poms/homePage/homePage';
-import { TestDataLead } from '../test_data/testDataLead';
+import { getTestDataLeadDuplicated } from '../test_data/testDataLeadDuplicated';
 import { LeadsTabPage } from '../src/poms/lead/leadsTabPage';
 import { NewLeadPage } from '../src/poms/lead/newLeadPage';
 import { NewLeadDuplicatedPage } from '../src/poms/lead/newLeadDuplicatedPage';
+
+test.afterEach('Close the page', async ({ context }) => {
+	await context.close();
+});
 
 test('New Duplicated Lead Creating test @Leads @Negative', async ({ browser }) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
@@ -31,8 +35,8 @@ test('New Duplicated Lead Creating test @Leads @Negative', async ({ browser }) =
 	await leadsPage.validateAllComponents();
 	await leadsPage.clickOnNewBtn();
 
-	const testDataLead = new TestDataLead();
-	const leadData = testDataLead.getLeadData();
+	// const testDataLead = new TestDataLead();
+	const leadData = getTestDataLeadDuplicated();
 
 	// New Lead Form filling
 	const newLead = new NewLeadPage(page);
@@ -61,4 +65,6 @@ test('New Duplicated Lead Creating test @Leads @Negative', async ({ browser }) =
 	// DuplicatedCreated Lead Page
 	const leadDuplicatedPage = new NewLeadDuplicatedPage(page);
 	await leadDuplicatedPage.validateErrorMessage();
+
+	await context.close();
 });

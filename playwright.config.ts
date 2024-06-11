@@ -16,6 +16,18 @@ dotenv.config({ path: './env/' + process.env.TEST_ENVIRONMENT + '/.env' });
 export default defineConfig({
 	testDir: './tests',
 	snapshotPathTemplate: './src/screenShots/{testFilePath}/{arg}{ext}',
+	expect: {
+		toHaveScreenshot: {
+			threshold: 0.25,
+			maxDiffPixelRatio: 0.025,
+			maxDiffPixels: 25,
+		},
+		toMatchSnapshot: {
+			threshold: 0.25,
+			maxDiffPixelRatio: 0.025,
+			maxDiffPixels: 25,
+		},
+	},
 	/* Run tests in files in parallel */
 	fullyParallel: false,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,7 +48,7 @@ export default defineConfig({
 		],
 		['./customReporters/customReporter.ts'],
 		['./customReporters/customJsonReporter.ts'],
-		['list'],
+		['list', { printSteps: true }],
 		// isCI ? ['github'] : ['line'],
 	],
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -44,7 +56,7 @@ export default defineConfig({
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		// baseURL: 'http://127.0.0.1:3000',
 		viewport: null, //{ width: 2560, height: 1600 },
-		headless: true,
+		headless: false,
 		browserName: 'chromium',
 		screenshot: 'only-on-failure',
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -67,9 +79,9 @@ export default defineConfig({
 			name: 'Desktop_Chrome',
 			use: {
 				browserName: 'chromium',
-				viewport: null,
+				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
-					args: ['--start-maximized'],
+					// args: ['--start-maximized'],
 					slowMo: 100,
 				},
 			},
@@ -79,9 +91,9 @@ export default defineConfig({
 			name: 'Desktop_Edge',
 			use: {
 				channel: 'msedge',
-				viewport: null,
+				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
-					args: ['--start-maximized'],
+					// args: ['--start-maximized'],
 					slowMo: 200,
 				},
 			},
@@ -118,7 +130,12 @@ export default defineConfig({
 		},
 		{
 			name: 'Tablet_Safari',
-			use: { ...devices['iPad (gen 5) landscape'] },
+			use: {
+				...devices['iPad (gen 5) landscape'],
+				launchOptions: {
+					slowMo: 200,
+				},
+			},
 		},
 	],
 

@@ -23,7 +23,7 @@ class CustomJsonReporter implements Reporter {
 		switch (result.status) {
 			case 'failed':
 			case 'timedOut':
-				this.addFailMessage(`❌ Test ${test.title} failed\n>${result.error?.message}`);
+				this.addFailMessage(`Test ${test.title} failed\n>${result.error?.message}`);
 				this.failed++;
 				break;
 			case 'skipped':
@@ -52,18 +52,16 @@ class CustomJsonReporter implements Reporter {
 		const minutes = Math.floor(duration.asMinutes());
 		const seconds = duration.seconds();
 		const summaryMessage = this.failsMessage
-			? `Tests Failed ❌\n${this.failsMessage}`
-			: '👍 All tests passed successfully!';
+			? `Tests Failed ${this.failsMessage}`
+			: 'All tests passed successfully!';
 
 		const testData = {
 			startedMessage: this.startedMessage,
 			numberOfTestsMessage: this.numberOfTestsMessage,
 			duration: `Duration  of test run: ${minutes} minutes and ${seconds} seconds`,
-			results: {
-				passed: this.passed,
-				failed: this.failed,
-				skipped: this.skipped,
-			},
+			passed: this.passed,
+			failed: this.failed,
+			skipped: this.skipped,
 			summary: summaryMessage,
 		};
 		/*

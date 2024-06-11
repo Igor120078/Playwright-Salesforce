@@ -1,9 +1,5 @@
-import { Page } from '@playwright/test';
-
-export class TestDataLeadDuplicated {
-	constructor() {}
-
-	leadData = [
+export function getTestDataLeadDuplicated() {
+	const leadData = [
 		{
 			leadStatus: 'New',
 			salutation: 'Mr.',
@@ -29,8 +25,6 @@ export class TestDataLeadDuplicated {
 		},
 	];
 
-	getLeadData() {
-		let i = Math.floor(Math.random() * this.leadData.length);
-		return this.leadData[i];
-	}
+	let i = Math.floor(Math.random() * leadData.length);
+	return leadData[i];
 }
