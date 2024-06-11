@@ -7,22 +7,25 @@ test.afterEach('Close the page', async ({ context }) => {
 	await context.close();
 });
 
-test.skip('Screenshot of total value graph test @Screenshot @Positive', async ({ browser }, testInfo) => {
+test('Screenshot of total value graph test @Screenshot @Positive', async ({ browser }, testInfo) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
 	const page = await context.newPage();
 	const homePage = new HomePage(page);
 	await homePage.navigate();
 	await homePage.validateAllComponents();
 
-	const totalValueGraph = homePage.getTotalValueGraph();
+	// const totalValueGraph = homePage.getTotalValueGraph();
 	// expect(await page.locator(totalValueGraph).screenshot()).toMatchSnapshot('src/screenShots/totalValueGraph.png');
-	await totalValueGraph.screenshot({ path: 'src/screenShots/totalValueGraphTablet.png' });
+	// await totalValueGraph.screenshot({ path: 'src/screenShots/totalValueGraphTablet.png' });
+
+	const downloadSalesforce = homePage.getDownloadSalesforce();
+	// await downloadSalesforce.screenshot({ path: 'src/screenShots/downloadSalesforce.png' });
 
 	const projectName = testInfo.project.name;
 	if (projectName === 'Tablet_Safari') {
-		await expect(totalValueGraph).toHaveScreenshot('totalValueGraphTablet.png');
+		await expect(downloadSalesforce).toHaveScreenshot('downloadSalesforceTablet.png');
 	} else {
-		await expect(totalValueGraph).toHaveScreenshot('totalValueGraph.png');
+		await expect(downloadSalesforce).toHaveScreenshot('downloadSalesforce.png');
 	}
 
 	await context.close();

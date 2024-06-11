@@ -22,15 +22,12 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	await context.storageState({ path: 'storageState/loginState.json' });
 	await homePage.validateAllComponents();
 
-	const totalValueGraph = homePage.getTotalValueGraph();
-	await totalValueGraph.scrollIntoViewIfNeeded();
-	// await totalValueGraph.screenshot({ path: 'src/screenShots/totalValueGraph.png' });
-
+	const downloadSalesforce = homePage.getDownloadSalesforce();
 	const projectName = testInfo.project.name;
 	if (projectName === 'Tablet_Safari') {
-		await expect(totalValueGraph).toHaveScreenshot('totalValueGraphTablet.png');
+		await expect(downloadSalesforce).toHaveScreenshot('downloadSalesforceTablet.png');
 	} else {
-		await expect(totalValueGraph).toHaveScreenshot('totalValueGraph.png');
+		await expect(downloadSalesforce).toHaveScreenshot('downloadSalesforce.png');
 	}
 	await context.close();
 });

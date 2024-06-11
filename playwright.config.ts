@@ -33,7 +33,7 @@ export default defineConfig({
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
 	forbidOnly: !!process.env.CI,
 	/* Retry on CI only */
-	retries: process.env.CI ? 2 : 0,
+	retries: process.env.CI ? 1 : 0,
 	/* Opt out of parallel tests on CI. */
 	workers: 1,
 	// workers: process.env.CI ? 1 : undefined,
@@ -69,7 +69,7 @@ export default defineConfig({
 			//   isEnabled: (name, severity) => true,
 			//   log: (name, severity, message, args) => console.log(name, severity)
 			// },
-			slowMo: 100,
+			slowMo: 200,
 		},
 	},
 
@@ -82,7 +82,7 @@ export default defineConfig({
 				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
 					// args: ['--start-maximized'],
-					slowMo: 100,
+					slowMo: 200,
 				},
 			},
 		},
@@ -94,7 +94,7 @@ export default defineConfig({
 				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
 					// args: ['--start-maximized'],
-					slowMo: 200,
+					slowMo: 300,
 				},
 			},
 		},
@@ -133,7 +133,7 @@ export default defineConfig({
 			use: {
 				...devices['iPad (gen 5) landscape'],
 				launchOptions: {
-					slowMo: 200,
+					slowMo: 300,
 				},
 			},
 		},

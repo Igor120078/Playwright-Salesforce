@@ -27,7 +27,7 @@ class CustomJsonReporter implements Reporter {
 				this.failed++;
 				break;
 			case 'skipped':
-				this.addFailMessage(`⚠️ Test ${test.title} skipped`);
+				this.addFailMessage(`Test ${test.title} skipped`);
 				this.skipped++;
 				break;
 			case 'passed':
@@ -64,23 +64,6 @@ class CustomJsonReporter implements Reporter {
 			skipped: this.skipped,
 			summary: summaryMessage,
 		};
-		/*
-		`
-            Test run results
-            ---
-            ${this.introMessage}
-            ---
-            Summary:
-                - ⌛ Duration  of test run: ${minutes} minutes and ${seconds} seconds
-                - 📦 Tests results: 
-                - ✅ ${this.passed}
-                - ❌ ${this.failed}
-                - ⏩ ${this.skipped}
-            
-            ${this.failsMessage ? `Tests Failed ❌\n${this.failsMessage}` : '👍 All tests passed successfully!'}
-                
-        To see the full report, please visit our CI/CD piplene with reporter.`;
-		*/
 		return JSON.stringify(testData, null, 2);
 	}
 }

@@ -11,6 +11,7 @@ export class HomePage {
 	private myTasks: Locator;
 	private calendar: Locator;
 	private totalValueGraph: Locator;
+	private downloadSalesforce: Locator;
 
 	constructor(page: Page) {
 		this.page = page;
@@ -19,6 +20,7 @@ export class HomePage {
 		this.myTasks = page.getByText('My Tasks', { exact: true });
 		this.calendar = page.getByText('Calendar', { exact: true });
 		this.totalValueGraph = page.locator("//img[@id='01a2o000003kOnTImg']");
+		this.downloadSalesforce = page.locator('#listItem-getSalesforce1');
 	}
 
 	async navigate(): Promise<void> {
@@ -39,6 +41,10 @@ export class HomePage {
 
 	public getTotalValueGraph(): Locator {
 		return this.totalValueGraph;
+	}
+
+	public getDownloadSalesforce(): Locator {
+		return this.downloadSalesforce;
 	}
 
 	async selectMainMenuPOM(): Promise<MainMenu> {
