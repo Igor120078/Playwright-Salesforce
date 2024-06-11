@@ -1,5 +1,5 @@
 /* eslint-disable import/order */
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { HomePage } from '../src/poms/homePage/homePage';
 import { MainMenuDesktop } from '../src/poms/homePage/mainMenuDesktop';
 import { MainMenuTablet } from '../src/poms/homePage/mainMenuTablet';
@@ -15,6 +15,13 @@ test.afterEach('Close the page', async ({ context }) => {
 test('New Lead Creating test @Leads @Positive', async ({ browser }) => {
 	const context = await browser.newContext({ storageState: 'storageState/loginState.json' });
 	const page = await context.newPage();
+
+	const errors: Array<Error> = [];
+	page.addListener('console', (msg) => {
+		if (msg.type() === 'error') {
+			errors.push(new Error(msg.text()));
+		}
+	});
 
 	const homePage = new HomePage(page);
 	await homePage.navigate();
@@ -82,6 +89,12 @@ test('New Lead Creating test @Leads @Positive', async ({ browser }) => {
 		leadData.leadSource,
 		`${leadData.street}${leadData.city}, ${leadData.zipCode}${leadData.country}`
 	);
+
+	if (errors.length > 0) {
+		console.log('Console errors found:', errors);
+	} else {
+		console.log('No Console errors found');
+	}
 
 	await context.close();
 });

@@ -13,6 +13,14 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	const context = await browser.newContext();
 	const page = await context.newPage();
 	const loginPage = new LoginPage(page);
+
+	let errors: Array<Error> = [];
+	page.addListener('console', (msg) => {
+		if (msg.type() === 'error') {
+			errors.push(new Error(msg.text()));
+		}
+	});
+
 	await loginPage.navigate();
 	await loginPage.validateAllComponents();
 	await loginPage.fillUsername(process.env.SALESFORCE_USER!);
@@ -29,5 +37,12 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 	} else {
 		await expect(downloadSalesforce).toHaveScreenshot('downloadSalesforce.png');
 	}
+
+	if (errors.length > 0) {
+		console.log('Console errors found:', errors);
+	} else {
+		console.log('No Console errors found');
+	}
+
 	await context.close();
 });
