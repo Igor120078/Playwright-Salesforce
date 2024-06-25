@@ -6,7 +6,7 @@ export function getTestDataLeadDuplicated() {
 			firstName: 'Miloš',
 			middleName: '',
 			lastName: 'Černý',
-			leadSuffix: 'Suffix',
+			leadSuffix: 'Duplicate',
 			leadTitle: 'Middle Customer',
 			leadEmail: 'milos.cernej@seznam.cz',
 			leadPhone: '736715702',

@@ -20,7 +20,7 @@ export class LeadPage {
 
 	constructor(page: Page) {
 		this.page = page;
-		this.leadTitle = page.locator("h2[class='pageDescription']");
+		this.leadTitle = page.locator("h2[class='topName']");
 		this.leadStatus = page.locator('#lea13_ileinner');
 		this.fullName = page.locator('#lea2_ileinner');
 		this.title = page.locator('#lea4_ileinner');

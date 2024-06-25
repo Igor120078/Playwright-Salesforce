@@ -45,4 +45,10 @@ export class LoginPage {
 		await this.loginBtn.click();
 		await this.page.waitForLoadState();
 	}
+
+	async login(): Promise<void> {
+		await this.fillUsername(process.env.SALESFORCE_USER!);
+		await this.fillPassword(process.env.SALESFORCE_PASSWORD!);
+		await this.clickOnLoginBtn();
+	}
 }

@@ -15,6 +15,20 @@ Run the install command and select the following to get started:
 -   Add a GitHub Actions workflow to easily run tests on CI
 -   Install Playwright browsers (default is true)
 
+### Run all the tests
+
+```
+    npx playwright test
+```
+
+### Run all the tests with a specific Project
+
+```
+    npx playwright test --project=Desktop_Chrome
+    npx playwright test --project=Desktop_Edge
+    npx playwright test --project=Tablet_Safari
+```
+
 ### Run with a specific Config File and specific Project and specific Tag
 
 ```
@@ -22,17 +36,11 @@ Run the install command and select the following to get started:
     npx playwright test tests/login.spec.ts --config playwright.config.ts --project=Tablet_Safari --grep @Login
 ```
 
-### Run all the tests with a specific Config File and specific Project
-
-```
-    npx playwright test --config playwright.config.ts --project=Desktop_Edge
-    npx playwright test --config playwright.config.ts --project=Tablet_Safari
-```
-
 ### Run the test with a custom Reporter
 
 ```
     npx playwright test tests/example.spec.ts --reporter=./customReporters/customReporter.ts
+    npx playwright test tests/example.spec.ts --reporter=./customReporters/influxReporter.ts
 ```
 
 ### Using Allure Reporter
@@ -48,7 +56,7 @@ Run the install command and select the following to get started:
 #### Run the test with a Allure Reporter
 
 ```
-    npx playwright test --project=Desktop_Edge --reporter=line,allure-playwright
+    npx playwright test --project=Desktop_Chrome --reporter=line,allure-playwright
 ```
 
 #### Generate an Allure report

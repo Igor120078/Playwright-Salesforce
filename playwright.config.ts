@@ -48,6 +48,7 @@ export default defineConfig({
 		],
 		['./customReporters/customReporter.ts'],
 		['./customReporters/customJsonReporter.ts'],
+		['./customReporters/influxReporter.ts'],
 		['list', { printSteps: true }],
 		// isCI ? ['github'] : ['line'],
 	],
@@ -69,7 +70,7 @@ export default defineConfig({
 			//   isEnabled: (name, severity) => true,
 			//   log: (name, severity, message, args) => console.log(name, severity)
 			// },
-			slowMo: 200,
+			slowMo: 0,
 		},
 	},
 
@@ -82,7 +83,7 @@ export default defineConfig({
 				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
 					// args: ['--start-maximized'],
-					slowMo: 200,
+					slowMo: 300,
 				},
 			},
 		},

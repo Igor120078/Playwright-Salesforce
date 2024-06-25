@@ -23,9 +23,10 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 
 	await loginPage.navigate();
 	await loginPage.validateAllComponents();
-	await loginPage.fillUsername(process.env.SALESFORCE_USER!);
-	await loginPage.fillPassword(process.env.SALESFORCE_PASSWORD!);
-	await loginPage.clickOnLoginBtn();
+	// await loginPage.fillUsername(process.env.SALESFORCE_USER!);
+	// await loginPage.fillPassword(process.env.SALESFORCE_PASSWORD!);
+	// await loginPage.clickOnLoginBtn();
+	await loginPage.login();
 	const homePage = new HomePage(page);
 	await context.storageState({ path: 'storageState/loginState.json' });
 	await homePage.validateAllComponents();
