@@ -2,8 +2,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/poms/login/loginPage';
 import { HomePage } from '../src/poms/homePage/homePage';
-import dotenv from 'dotenv';
-dotenv.config();
 
 test.afterEach('Close the page', async ({ context }) => {
 	await context.close();
@@ -23,9 +21,6 @@ test('Login and validate Salesforce Home Page @Login @Positive', async ({ browse
 
 	await loginPage.navigate();
 	await loginPage.validateAllComponents();
-	// await loginPage.fillUsername(process.env.SALESFORCE_USER!);
-	// await loginPage.fillPassword(process.env.SALESFORCE_PASSWORD!);
-	// await loginPage.clickOnLoginBtn();
 	await loginPage.login();
 	const homePage = new HomePage(page);
 	await context.storageState({ path: 'storageState/loginState.json' });

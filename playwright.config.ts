@@ -83,7 +83,7 @@ export default defineConfig({
 				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
 					// args: ['--start-maximized'],
-					slowMo: 300,
+					slowMo: 200,
 				},
 			},
 		},
@@ -95,7 +95,7 @@ export default defineConfig({
 				viewport: { width: 2500, height: 1200 },
 				launchOptions: {
 					// args: ['--start-maximized'],
-					slowMo: 300,
+					slowMo: 200,
 				},
 			},
 		},
@@ -134,7 +134,7 @@ export default defineConfig({
 			use: {
 				...devices['iPad (gen 5) landscape'],
 				launchOptions: {
-					slowMo: 300,
+					slowMo: 100,
 				},
 			},
 		},

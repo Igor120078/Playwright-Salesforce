@@ -53,7 +53,7 @@ Run the install command and select the following to get started:
     brew install allure
 ```
 
-#### Run the test with a Allure Reporter
+#### Run tests with a Allure Reporter
 
 ```
     npx playwright test --project=Desktop_Chrome --reporter=line,allure-playwright
@@ -69,4 +69,18 @@ Run the install command and select the following to get started:
 
 ```
     allure open ./allure-report
+```
+
+### Custom Reporter for sending data to influxDB
+
+#### Install influxdb-client:
+
+```
+    npm install @influxdata/influxdb-client
+```
+
+#### Run tests with an influxDB Reporter
+
+```
+    npx playwright test --project=Desktop_Chrome --reporter=./customReporters/influxReporter.ts,html
 ```
